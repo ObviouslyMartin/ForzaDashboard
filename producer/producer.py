@@ -1,8 +1,32 @@
+'''
+Procucer listens on local host at a specified port and creates/sends ForzaDataPackets
+to the consumer.
+
+Copyright (c) 2024 Martin Plut
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+'''
+
 from kafka import KafkaProducer
 import json
 import datetime as dt
 from fdp import ForzaDataPacket
-# import socket
 import logging
 import yaml as yaml
 
@@ -16,6 +40,7 @@ class FDPProducer:
         self.topic = 'forza-data'
         self.stop_event = stop_event
         self.n_packets = 0
+
     def start_producer(self, ):
         self.receive_packet(self.stop_event)
         self.producer.close()
@@ -29,7 +54,7 @@ class FDPProducer:
             message, address = self.socket.recvfrom(1024)
             self.n_packets += 1
             fdp = ForzaDataPacket(message)
-            # logging.info(f'num received packets during session: {self.n_packets}')
+            logging.info(f'INFO: Running packet count: {self.n_packets}')
             # logging.info(f'Received message from {address}: {message}')
 
             if fdp.is_race_on:

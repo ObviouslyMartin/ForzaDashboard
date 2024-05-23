@@ -1,5 +1,3 @@
-#!/usr/env/python
-# -*- coding: utf-8 -*-
 '''
 Script to listen on a given port for UDP packets sent by a Forza Motorsport (2023)
 "data out" stream and write the data to a CSV file.
