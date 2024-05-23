@@ -1,0 +1,9 @@
+port: 5000
+packet_format: dash
+parameter_list:
+  - engine_max_rpm
+  - current_engine_rpm
+  - boost
+  - fuel
+  - power
+  - torque

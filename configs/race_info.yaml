@@ -1,0 +1,10 @@
+port: 5000
+packet_format: dash
+parameter_list:
+  - wall_clock
+  - timestamp_ms
+  - lap_no
+  - cur_lap_time
+  - best_lap_time
+  - last_lap_time
+  - race_pos
