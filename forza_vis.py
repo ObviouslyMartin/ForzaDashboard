@@ -25,6 +25,7 @@ SOFTWARE.
 from visualization.visualize import visualize_data
 from producer.producer import FDPProducer 
 from consumer.consumer import FDPConsumer
+from visualization.visualize import FDPVisualizer
 import logging
 import socket
 import threading
@@ -94,7 +95,9 @@ def main():
     
     try:
         # Start the visualization
-        visualize_data(stop_event, fdpconsumer.data_queue)
+        forza_vis = FDPVisualizer(stop_event, fdpconsumer.data_queue, params)
+
+        visualize_data()
     except KeyboardInterrupt:
         logging.info('{INFO: Exiting due to keyboard interrupt')
 
